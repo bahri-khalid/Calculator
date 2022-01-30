@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 public class Calculator implements ActionListener {
 	JFrame frame;
 	JTextField textfield;
@@ -117,7 +116,10 @@ public class Calculator implements ActionListener {
 			}
 		}
 		if(e.getSource()==decBtn) {
-			textfield.setText(textfield.getText().concat("."));
+			if(!textfield.getText().contains(".")) {
+				
+					textfield.setText(textfield.getText().concat("."));
+			}
 		}
 		if(e.getSource()==addBtn) {
 			operator = '+';
@@ -144,8 +146,38 @@ public class Calculator implements ActionListener {
 			textfield.setText("");
 			switch(operator) {
 			case '+':
-				textfield.setText(String.valueOf(num1+num2));
+				textfield.setText(String.format("%.4f",num1+num2));
+				break;
+			case '-':
+				textfield.setText(String.format("%.4f",num1-num2));
+				break;
+			case '*':
+				textfield.setText(String.format("%.4f",num1*num2));
+				break;
+			case '/':
+				if(num2!=0) {
+					textfield.setText(String.format("%.4f",num1/num2));
+				}else {
+					textfield.setText("");
+				}
+				break;
 			}
+			
+		}
+		if(e.getSource()==clrBtn) {
+			textfield.setText("");
+			
+		}
+		if(e.getSource()==negBtn) {
+			if(!textfield.getText().contains("-")) {
+				textfield.setText("-".concat(textfield.getText()));
+			}else {
+				textfield.setText((String)(textfield.getText()).replaceFirst("-", ""));
+			}
+		}
+		if(e.getSource()==delBtn) {
+			String cntnt = textfield.getText();
+			textfield.setText(cntnt.substring(0,cntnt.length()-1));
 		}
 	}
 
