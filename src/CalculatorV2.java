@@ -97,6 +97,7 @@ public class CalculatorV2 implements ActionListener {
 		frame.add(panel);
 		frame.add(panel2);
 		frame.add(textfield);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) {
